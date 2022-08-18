@@ -31,7 +31,7 @@
 				</svg>
 			</button>
 		</div>
-
+  
 
 		<ECard :name="'Lavadora'" :avgprice="'12'" :power="'2000'"/>
 
@@ -121,6 +121,7 @@ export default {
   data() {
     return {
       price: 0,
+      edoms: []
     }
   },
   setup() {
