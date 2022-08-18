@@ -1,13 +1,50 @@
 <template>
   <div class="bill">
-    <h1>AQUI VA EL CONTENIDO</h1>
-    <div class="flex gap-3">
-      <button class="btn bg-indigo-500 hover:bg-indigo-600 text-white" aria-controls="feedback-modal"
-        @click.stop="addModalOpen = true">Agregar electrodoméstico</button>
-      <button class="btn bg-indigo-500 hover:bg-indigo-600 text-white" aria-controls="feedback-modal"
-        @click.stop="editModalOpen = true">E</button>
-    </div>
-    <ModalBasic id="feedback-modal" :modalOpen="addModalOpen" @close-modal="addModalOpen = false"
+    <div
+		class="w-full my-1 mr-1 px-6 py-4 flex flex-col bg-gray-200 dark:bg-white
+		dark:text-gray-400 rounded-r-lg overflow-y-auto">
+		<!-- Right side NavBar -->
+
+
+		<span class="mt-4 text-gray-600 text-left">Costo de la luz</span>
+		<span class="mt-1 text-3xl font-semibold text-left">$ {{price}}</span>
+
+		<button class="inline-flex px-4 rounded font-medium py-2 bg-indigo-500 hover:bg-indigo-600 text-white text-left" aria-controls="feedback-modal"
+      @click.stop="addModalOpen = true">
+      
+			<svg class="h-8 w-8 fill-current " viewBox="0 0 24 24">
+				<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+			</svg>
+      <span class="mt-1 ml-2">Agregar</span>
+    </button>
+		<div class="mt-12 flex items-center">
+			<!-- Payments -->
+			<span>Electrodomesticos</span>
+			<button class="ml-2 focus:outline-none">
+				<svg class="h-5 w-5 fill-current" viewBox="0 0 256 512">
+					<path
+						d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9
+						0l-22.6-22.6c-9.4-9.4-9.4-24.6
+						0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3
+						103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1
+						34z"></path>
+				</svg>
+			</button>
+		</div>
+
+
+		<ECard :name="'Lavadora'" :avgprice="'12'" :power="'2000'"/>
+
+		<ECard :name="'Lavadora'" :avgprice="'12'" :power="'2000'"/>
+
+		<ECard :name="'Lavadora'" :avgprice="'12'" :power="'2000'"/>
+
+		<ECard :name="'Lavadora'" :avgprice="'12'" :power="'2000'"/>
+
+
+	</div>
+
+      <ModalBasic id="feedback-modal" :modalOpen="addModalOpen" @close-modal="addModalOpen = false"
       title="Agregar electrodoméstico">
       <!-- Modal content -->
       <div class="px-5 py-4">
@@ -73,12 +110,18 @@
 import { ref } from 'vue';
 import ModalBasic from '../components/ModalBasic';
 import Input from '../components/Input';
-
+import ECard from '../components/ElectrodomesticCard.vue'
 export default {
   name: 'BillView',
   components: {
     ModalBasic,
-    Input
+    Input,
+    ECard
+  },
+  data() {
+    return {
+      price: 0,
+    }
   },
   setup() {
     const addModalOpen = ref(false)
@@ -148,5 +191,4 @@ export default {
     }
   }
 }
-
 </script>

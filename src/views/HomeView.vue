@@ -1,16 +1,15 @@
 <template>
-  <ProjectSlider class="home relative grid grid-cols-12 place-content-center justify-center">
-    <img class="absolute object-cover -m-8 z-0 min-h-screen col-span-12 justify-self-center" alt="background" src="https://images.unsplash.com/photo-1633163503689-f91bc6e48e4a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80">
-    <div class="col-start-5 col-span-4 z-10">
+  <ProjectSlider class="home min-h-screen relative bg-green-600 overflow-hidden flex">
+    <img class="absolute object-cover -m-8 z-0 h-full justify-self-center" alt="background" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1744&q=80">
+    <div class="absolute bg-[#000000] bg-opacity-40  top-0 bottom-0 right-0 left-0  -m-8 z-10 pt-8 flex flex-col justify-center items-center">
         
-      <h1 class="align-self-bottom text-5xl font-extrabold text-blue-600">
+      <img class="h-60 rounded" src="../assets/ecopol.png"/>
+
+      <h3 class="mt-[10vh] w-screen z-10 text-4xl font-extrabold text-gray-100 text-center">
         ¿Cuánto pagaré al final de mes?
-      </h1>
-      <h2 class="text-2xl font-bold text-white"> 
-        Averigua un estimado del precio de forma rápida y sencilla 😉
-      </h2>
-      <br><br>
-      <ProjectButton><router-link to="/bill">Calcular</router-link> </ProjectButton>
+      </h3>
+      
+      <ProjectButton class="z-10 mt-12 text-xl px-12 py-4 font-bold"><router-link class="focus:outline-none" to="/bill">Descúbrelo</router-link> </ProjectButton>
     </div>
   </ProjectSlider>
 </template>
