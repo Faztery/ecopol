@@ -7,7 +7,7 @@
 
 
 		<span class="mt-4 text-gray-600 text-left">Costo de la luz</span>
-		<span class="mt-1 text-3xl font-semibold text-left">$ {{bills.length >0 ?   
+		<span class="my-2 text-3xl font-semibold text-left">$ {{bills.length >0 ?   
       bills.reduce((total,obj)=>{
           return total + obj.price
         }, 0) :
