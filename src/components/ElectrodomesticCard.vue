@@ -21,7 +21,7 @@
 
 			</div>
 
-			<span>$ {{avgprice}}</span>
+			<span >${{avgprice}}</span>
 
 		</button>
 
