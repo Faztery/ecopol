@@ -7,7 +7,11 @@
 
 
 		<span class="mt-4 text-gray-600 text-left">Costo de la luz</span>
-		<span class="mt-1 text-3xl font-semibold text-left">$ {{price}}</span>
+		<span class="mt-1 text-3xl font-semibold text-left">$ {{bills.length >0 ?   
+      bills.reduce((total,obj)=>{
+          return total + obj.price
+        }, 0) :
+        0 }}</span>
 
 		<button class="inline-flex px-4 rounded font-medium py-2 bg-indigo-500 hover:bg-indigo-600 text-white text-left" aria-controls="feedback-modal"
       @click.stop="addModalOpen = true">
@@ -33,18 +37,11 @@
 		</div>
   
 
-		<ECard :name="'Lavadora'" :avgprice="'12'" :power="'2000'"/>
-
-		<ECard :name="'Lavadora'" :avgprice="'12'" :power="'2000'"/>
-
-		<ECard :name="'Lavadora'" :avgprice="'12'" :power="'2000'"/>
-
-		<ECard :name="'Lavadora'" :avgprice="'12'" :power="'2000'"/>
-
-
+		<ECard v-for="(bill,index) in bills" :key="`Bill-${index}`" :name="`${bill.name}`" :avgprice="bill.price" :power="bill.consumption"/>
+    <ECard v-if="bills.length < 1" :name="'Agregue un electrodoméstico para comenzar.'" :avgprice="'0'" :power="'0'"></ECard>
 	</div>
 
-      <ModalBasic id="feedback-modal" :modalOpen="addModalOpen" @close-modal="addModalOpen = false"
+      <ModalBasic id="create-modal" :modalOpen="addModalOpen" @close-modal="addModalOpen = false"
       title="Agregar electrodoméstico">
       <!-- Modal content -->
       <div class="px-5 py-4">
@@ -108,8 +105,8 @@
 </template>
 <script>
 import { ref } from 'vue';
-import ModalBasic from '../components/ModalBasic';
-import Input from '../components/Input';
+import ModalBasic from '../components/ModalBasic'
+import Input from '../components/Input'
 import ECard from '../components/ElectrodomesticCard.vue'
 export default {
   name: 'BillView',
@@ -121,7 +118,7 @@ export default {
   data() {
     return {
       price: 0,
-      edoms: []
+      bills: []
     }
   },
   setup() {
@@ -142,10 +139,22 @@ export default {
   },
   methods: {
     isNumeric: function (n) {
-      return !isNaN(parseFloat(n)) && isFinite(n);
+      return !isNaN(parseFloat(n) && isFinite(n));
+    },
+    
+    resetData: function () {
+      this.data.name = ''
+      this.data.hours = ''
+      this.data.consumption = ''
     },
     sendForm1: function () {
       if (this.checkForm1()) {
+        this.$data.bills.push({
+          name:this.data.name,
+          price: this.data.hours * 30 * this.energyPrice,
+          consumption: this.data.consumption
+        });
+        this.resetData();
         this.addModalOpen = false;
       }
     },
@@ -155,41 +164,48 @@ export default {
       }
     },
     checkForm1: function () {
-      console.log("hola")
-      if (this.data.name && this.data.hours && this.data.consumption) {
-        return true;
-      }
       this.errorsForm1 = {};
       if (!this.data.name) {
         this.errorsForm1.name = 'El nombre del electrodoméstico es requerido';
+        return false;
       }
-      if (!this.data.hours) {
+      else if (!this.data.hours) {
         this.errorsForm1.hours = 'Las horas de consumo son requeridas';
+        return false;
       }
-      if (!this.isNumeric(this.data.hours)) {
-        this.errorsForm1.hours = 'Las horas de consumo deben ser numéricas';
+      else if (!this.isNumeric(this.data.hours)) {
+        this.errorsForm1.hours = 'Las horas de consumo deben ser un número';
+        return false;
       }
-      if (!this.data.consumption) {
+      else if (!this.data.consumption) {
         this.errorsForm1.consumption = 'El consumo del electrodoméstico es requerido';
+        return false;
       }
-      if (!this.isNumeric(this.data.consumption)) {
-        this.errorsForm1.consumption = 'El consumo del electrodoméstico debe ser numérico';
+      else if (!this.isNumeric(this.data.consumption)) {
+        this.errorsForm1.consumption = 'El consumo del electrodoméstico debe ser un número';
+        return false;
       }
-      return false;
-    },
-    checkForm2: function () {
-      if (this.energyPrice) {
+      else {  
         return true;
       }
+    },
+    checkForm2: function () {
+      
       this.errorsForm2 = {};
       if (!this.energyPrice) {
         this.errorsForm2.energyPrice = 'El costo de energía es requerido';
+        return false;
       }
       if (!this.isNumeric(this.energyPrice)) {
         this.errorsForm2.energyPrice = 'El costo de energía debe ser numérico';
+        return false;
       }
-      return false;
-    }
+      if (this.energyPrice) {
+        return true;
+      }
+      
+    },
+    
   }
 }
 </script>
