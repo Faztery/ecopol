@@ -7,11 +7,11 @@
 
     
     <label class="w-full text-left">Precio del kw/h</label>
-    <input class="bg-transparent border-b border-indigo-900 w-32 outline-none" v-model="energyPrice" type="text" placeholder="Precio" required />
+    <input class="bg-gray-100 px-2 rounded-t hover:bg-gray-300 active:bg-white focus:bg-white border-b border-indigo-900 w-32 outline-none" v-model="energyPrice" type="text" placeholder="Precio" required />
 		<span class="mt-4 text-gray-600 text-left">Costo de la luz</span>
 		<span class="my-2 text-3xl font-semibold text-left">$ {{bills.length >0 ?   
       bills.reduce((total,obj)=>{
-          return total + obj.price
+          return total + (obj.price * energyPrice)
         }, 0) :
         0 }}</span>
 
