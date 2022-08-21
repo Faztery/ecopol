@@ -5,9 +5,15 @@
         
       <img class="h-60 rounded" src="../assets/ecopol.png"/>
 
-      <h3 class="mt-[10vh] w-screen z-10 text-4xl font-extrabold text-gray-100 text-center">
+      <h3 class="mt-[10vh] w-screen z-10 text-4xl font-extrabold text-white text-center">
         ¿Cuánto pagaré al final de mes?
       </h3>
+      <span class=" w-screen z-10 text-md font-extrabold text-gray-300 text-center">
+        Alfredo Andres Porras Mendez
+      </span>
+      <span class="w-screen z-10 text-md font-extrabold text-gray-300 text-center">
+        Joel Eduardo Veloz Pazmiño
+      </span>
       
       <ProjectButton class="z-10 mt-12 text-xl px-12 py-4 font-bold"><router-link class="focus:outline-none" to="/bill">Descúbrelo</router-link> </ProjectButton>
     </div>
