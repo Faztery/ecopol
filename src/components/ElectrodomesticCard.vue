@@ -21,7 +21,7 @@
 
 			</div>
 
-			<span >${{avgprice}}</span>
+			<span >{{'$'+avgprice}}</span>
 
 		</button>
 
@@ -31,4 +31,4 @@
 export default {
     props:['name','power','avgprice']
 }
-</script>
+</script>4

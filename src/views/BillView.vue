@@ -5,7 +5,9 @@
 		dark:text-gray-400 rounded-r-lg overflow-y-auto">
 		<!-- Right side NavBar -->
 
-
+    
+    <label class="w-full text-left">Precio del kw/h</label>
+    <input class="bg-transparent border-b border-indigo-900 w-32 outline-none" v-model="energyPrice" type="text" placeholder="Precio" required />
 		<span class="mt-4 text-gray-600 text-left">Costo de la luz</span>
 		<span class="my-2 text-3xl font-semibold text-left">$ {{bills.length >0 ?   
       bills.reduce((total,obj)=>{
@@ -21,6 +23,8 @@
 			</svg>
       <span class="mt-1 ml-2">Agregar</span>
     </button>
+
+    
 		<div class="mt-12 flex items-center">
 			<!-- Payments -->
 			<span>Electrodomesticos</span>
@@ -37,11 +41,11 @@
 		</div>
   
 
-		<ECard v-for="(bill,index) in bills" :key="`Bill-${index}`" :name="`${bill.name}`" :avgprice="bill.price" :power="bill.consumption"/>
+		<ECard v-for="(bill,index) in bills" :key="`Bill-${index}`" :name="`${bill.name}`" :avgprice="bill.price * energyPrice" :power="bill.consumption"/>
     <ECard v-if="bills.length < 1" :name="'Agregue un electrodoméstico para comenzar.'" :avgprice="'0'" :power="'0'"></ECard>
 	</div>
 
-      <ModalBasic id="create-modal" :modalOpen="addModalOpen" @close-modal="addModalOpen = false"
+    <ModalBasic id="create-modal" :modalOpen="addModalOpen" @close-modal="addModalOpen = false"
       title="Agregar electrodoméstico">
       <!-- Modal content -->
       <div class="px-5 py-4">
@@ -151,7 +155,7 @@ export default {
       if (this.checkForm1()) {
         this.$data.bills.push({
           name:this.data.name,
-          price: this.data.hours * 30 * this.energyPrice,
+          price: this.data.hours * 30 ,
           consumption: this.data.consumption
         });
         this.resetData();
